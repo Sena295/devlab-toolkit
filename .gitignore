@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.db
+.env
+.env.*
+node_modules/
+quadro.json
+out/
+.organizer_journal.json

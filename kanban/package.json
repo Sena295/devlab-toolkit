@@ -1,0 +1,11 @@
+{
+  "name": "kanban-cli",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kanban com WIP limit e persistência em JSON (dados fictícios)",
+  "scripts": {
+    "test": "node --test",
+    "demo": "node cli.js demo"
+  },
+  "license": "MIT"
+}

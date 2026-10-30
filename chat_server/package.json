@@ -1,0 +1,8 @@
+{
+  "name": "chat-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chat TCP em tempo real com salas (Node net, sem dependências)",
+  "scripts": { "test": "node --test", "start": "node server.js" },
+  "license": "MIT"
+}

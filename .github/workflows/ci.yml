@@ -18,8 +18,10 @@ jobs:
           node-version: 20
       - name: Python tests
         run: |
-          for m in log_analyzer file_organizer scheduler datagen finance_report; do
+          for m in log_analyzer file_organizer scheduler datagen finance_report url_shortener auth_service library_api bot_engine weather_cli; do
             python -m unittest discover -s "$m/tests" -t .
           done
       - name: Node tests
-        run: cd kanban && node --test
+        run: |
+          (cd kanban && node --test)
+          (cd chat_server && node --test)

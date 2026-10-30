@@ -4,12 +4,13 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 echo "== Testes Python =="
-for m in log_analyzer file_organizer scheduler datagen finance_report; do
+for m in log_analyzer file_organizer scheduler datagen finance_report url_shortener auth_service library_api bot_engine weather_cli; do
   python -m unittest discover -s "$m/tests" -t .
 done
 
 echo "== Testes Node =="
 (cd kanban && node --test)
+(cd chat_server && node --test)
 
 echo "== Demos =="
 python -m log_analyzer demo || true   # exit 1 = achados graves (esperado na demo)

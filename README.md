@@ -12,6 +12,13 @@ Coleção de mini-projetos de estudo, **sem front-end HTML**: tudo roda no termi
 | [`kanban/`](kanban) | JavaScript (Node) | Estado imutável, mover cards (drag & drop lógico), WIP, persistência em JSON |
 | [`datagen/`](datagen) | Python | Gerador de dados fictícios (CSV/JSON/SQLite) |
 | [`finance_report/`](finance_report) | Python | CSV, regex de categorização, relatório em texto |
+| [`url_shortener/`](url_shortener) | Python | API REST de encurtador: base62, alias, expiração, estatísticas de cliques |
+| [`auth_service/`](auth_service) | Python | Autenticação: PBKDF2, JWT HS256 feito à mão, refresh com rotação, RBAC, bloqueio por tentativas |
+| [`library_api/`](library_api) | Python + SQL | API REST de biblioteca: empréstimos, multa por atraso, ISBN-10 |
+| [`httpkit/`](httpkit) | Python | Mini-framework HTTP (rotas, middlewares, testável sem sockets) usado pelas APIs acima |
+| [`chat_server/`](chat_server) | JavaScript (Node) | Chat em tempo real via TCP: salas, apelidos, histórico |
+| [`bot_engine/`](bot_engine) | Python | Motor de bot (Discord/Telegram): comandos, lembretes, enquetes, calculadora segura |
+| [`weather_cli/`](weather_cli) | Python | Clima com Open-Meteo, cache em disco e fallback offline |
 | [`sql/`](sql) | SQL | Joins, CTEs, *window functions* |
 | [`scripts/`](scripts) | Shell | Orquestração dos testes e demos |
 
@@ -30,6 +37,10 @@ python -m file_organizer demo           # pasta temporária, organiza e desfaz
 python -m file_organizer organize ~/Downloads --dry-run --by-date
 
 python -m scheduler demo
+python -m bot_engine.engine               # bot interativo no terminal
+python -m url_shortener.service         # API em http://127.0.0.1:8000
+node chat_server/server.js              # chat TCP (use: nc 127.0.0.1 4000)
+python -m weather_cli.weather "Recife"
 python -m scheduler --db agenda.db book "Sala Azul" "Ana" 2025-03-10T09:00 2025-03-10T10:00
 
 node kanban/cli.js demo
@@ -51,8 +62,8 @@ python -m datagen.generate out/ && sqlite3 out/loja.db < sql/analytics.sql
 ## Testes
 
 ```bash
-for m in log_analyzer file_organizer scheduler datagen finance_report; do python -m unittest discover -s $m/tests -t .; done
-cd kanban && node --test
+for m in log_analyzer file_organizer scheduler datagen finance_report url_shortener auth_service library_api bot_engine weather_cli; do python -m unittest discover -s $m/tests -t .; done
+(cd kanban && node --test); (cd chat_server && node --test)
 ```
 
 ## Segurança

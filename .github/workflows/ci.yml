@@ -16,12 +16,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
       - name: Python tests
         run: |
-          for m in log_analyzer file_organizer scheduler datagen finance_report url_shortener auth_service library_api bot_engine weather_cli; do
+          for m in log_analyzer file_organizer scheduler datagen finance_report url_shortener auth_service library_api bot_engine weather_cli tinylang algolab kvstore; do
             python -m unittest discover -s "$m/tests" -t .
           done
       - name: Node tests
         run: |
           (cd kanban && node --test)
           (cd chat_server && node --test)
+      - name: Java tests
+        run: |
+          for m in java_bank java_graph; do
+            (cd "$m" && javac -d out src/*/*.java && java -cp out "$(ls src)".Tests)
+          done
+      - name: TypeScript tests
+        run: |
+          for m in ts_validator ts_scheduler ts_markdown; do
+            (cd "$m" && deno test)
+          done

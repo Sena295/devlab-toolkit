@@ -19,10 +19,18 @@ Coleção de mini-projetos de estudo, **sem front-end HTML**: tudo roda no termi
 | [`chat_server/`](chat_server) | JavaScript (Node) | Chat em tempo real via TCP: salas, apelidos, histórico |
 | [`bot_engine/`](bot_engine) | Python | Motor de bot (Discord/Telegram): comandos, lembretes, enquetes, calculadora segura |
 | [`weather_cli/`](weather_cli) | Python | Clima com Open-Meteo, cache em disco e fallback offline |
+| [`tinylang/`](tinylang) | Python | Linguagem de script própria: lexer, parser recursivo descendente, closures, interpretador |
+| [`algolab/`](algolab) | Python | Estruturas e algoritmos do zero: LRU, Trie, heap, BST, Bloom filter, DP, N-Rainhas |
+| [`kvstore/`](kvstore) | Python | Banco chave-valor com log append-only, CRC, TTL e compactação |
+| [`java_bank/`](java_bank) | Java | Domínio bancário: records, enums, transferências atômicas sem deadlock, juros |
+| [`java_graph/`](java_graph) | Java | Grafos: BFS/DFS, Dijkstra, ordenação topológica, Kruskal, A* em labirinto |
+| [`ts_validator/`](ts_validator) | TypeScript | Biblioteca de validação de schemas com inferência de tipos (estilo zod) |
+| [`ts_scheduler/`](ts_scheduler) | TypeScript | Parser de cron + agendador de jobs com retry e backoff |
+| [`ts_markdown/`](ts_markdown) | TypeScript | Renderizador de Markdown para o terminal (ANSI), com tabelas |
 | [`sql/`](sql) | SQL | Joins, CTEs, *window functions* |
 | [`scripts/`](scripts) | Shell | Orquestração dos testes e demos |
 
-Somente biblioteca padrão — nada para instalar além de Python 3.10+ e Node 18+.
+Somente biblioteca padrão — nada para instalar além de Python 3.10+, Node 18+, JDK 17+ e Deno 2 (para os módulos TypeScript).
 
 ## Como rodar
 
@@ -37,6 +45,9 @@ python -m file_organizer demo           # pasta temporária, organiza e desfaz
 python -m file_organizer organize ~/Downloads --dry-run --by-date
 
 python -m scheduler demo
+python -m tinylang demo                 # interpretador próprio
+(cd java_bank && javac -d out src/bank/*.java && java -cp out bank.Main)
+(cd ts_markdown && deno run --allow-read src/markdown.ts ../README.md)
 python -m bot_engine.engine               # bot interativo no terminal
 python -m url_shortener.service         # API em http://127.0.0.1:8000
 node chat_server/server.js              # chat TCP (use: nc 127.0.0.1 4000)
